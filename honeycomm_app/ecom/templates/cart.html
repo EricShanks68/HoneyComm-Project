@@ -1,0 +1,60 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  My cart
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% for product in mycart %}
+          <div class="col mb-5">
+              <div class="card h-100">
+                  <!-- Product image-->
+                  <img class="card-img-top" src="{{product.product_picture.url}}" alt="..." />
+                  <!-- Product details-->
+                  <div class="card-body p-4">
+                      <div class="text-center">
+                          <!-- Product name maybe try to wrap link around the image when get image to work-->
+                          <h5 class="fw-bolder">{{ product.title}}</h5>
+                          <!-- Product price-->
+                          ${{ product.price }}
+                            <div class="text-center">
+                            <!-- Product name maybe try to wrap link around the image when get image to work-->
+                            <h5 class="fw-bolder">Quantity</h5>
+                            <!-- Product price-->
+                            <p> 1 </p>
+                      </div>
+                      </div>
+                  </div>
+                  <!-- Product actions-->
+                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent"> 
+                    <div class="text-center"> 
+                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    {% csrf_token %} 
+                    <button value = {{product.id}} data-action="add" class='btn btn-outline-dark mt-auto update-cart' onclick="remove_from_cart(JSON.stringify(value))" > 
+                      Remove from cart</button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+</section>
+
+ <!-- <div class="cart_layout">
+  <h1>Cart</h1>
+  {% for item in mycart %}
+  <p>{{ item }}</p>
+  {% endfor %}
+ </div> -->
+
+{% endblock %}
